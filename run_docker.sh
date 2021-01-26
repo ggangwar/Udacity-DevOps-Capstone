@@ -12,4 +12,4 @@ docker image ls
 
 # Step 3: 
 # Run flask app
-docker run -p 8000:80 gg-devops-capstone-blue
+#docker run -p 8000:80 gg-devops-capstone-blue
