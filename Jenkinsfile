@@ -42,8 +42,7 @@ pipeline {
     }
     stage('Deploy container') {
       steps {
-        echo 'Deploying container'
-        sh 'make deploy'
+        sh 'kubectl apply -f ./kubernetes'
       }
     }
     stage('Redirect service') {
