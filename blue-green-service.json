@@ -1,0 +1,23 @@
+{
+    "kind":"Service",
+    "apiVersion":"v1",
+    "metadata":{
+       "name":"bluegreen",
+       "labels":{
+          "app":"bluegreen"
+       }
+    },
+    "spec":{
+       "ports": [
+          {
+            "port":8000,
+            "targetPort":80
+          }
+       ],
+       "selector":{
+          "app":"gg-devops-capstone-blue"
+       },
+       "type": "LoadBalancer"
+    }
+ }
+ 
