@@ -8,7 +8,3 @@ build:
 	sh ./run_docker.sh
 upload:
 	sh ./upload_docker.sh
-deploy:
-	sh ./run_kubernetes.sh
-redirect:
-	sh ./run_bluegreen_kubernetes.sh
