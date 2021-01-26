@@ -1,1 +1,0 @@
-kubectl apply -f ./replication-controller.json
