@@ -40,15 +40,28 @@ pipeline {
           }
       }
     }
+    stage('Set kubectl context') {
+			steps {
+				withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+					sh '''
+            kubectl config get-contexts
+						kubectl config use-context arn:aws:eks:ap-south-1:398230473428:cluster/gg-devops-capstone
+					'''
+				}
+			}
+		}
     stage('Deploy container') {
       steps {
-        sh 'kubectl apply -f ./kubernetes'
+        withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+          sh 'kubectl apply -f ./replication-controller.json'
+          }
       }
     }
     stage('Redirect service') {
       steps {
-        echo 'Redirecting service'
-        sh 'make redirect'
+        withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+          sh 'kubectl apply -f ./blue-green-service.json'
+          }
       }
     }
   }
