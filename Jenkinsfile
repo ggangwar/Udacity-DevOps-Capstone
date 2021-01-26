@@ -32,15 +32,7 @@ pipeline {
           sh 'make upload'
         }
       }
-    // }
-    // stage('Create kubeconfig file') {
-    //   steps {
-    //     echo 'Creating cubeconfig file'
-    //     withAWS(region: 'ap-south-1', credentials: 'aws-credentials') {
-    //       sh 'aws eks --region ap-south-1 update-kubeconfig --name gg-devops-capstone'
-    //     }
-    //   }
-    // }
+    }
     stage('Deploy container') {
       steps {
         echo 'Deploying container'

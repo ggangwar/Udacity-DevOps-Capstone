@@ -1,1 +1,0 @@
-kubectl apply -f ./green-controller.json
