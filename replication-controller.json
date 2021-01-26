@@ -2,27 +2,27 @@
     "kind":"ReplicationController",
     "apiVersion":"v1",
     "metadata":{
-       "name":"gg-devops-capstone-blue",
+       "name":"gg-devops-capstone-green",
        "labels":{
-          "app":"gg-devops-capstone-blue"
+          "app":"gg-devops-capstone-green"
        }
     },
     "spec":{
        "replicas":1,
        "selector":{
-          "app":"gg-devops-capstone-blue"
+          "app":"gg-devops-capstone-green"
        },
        "template":{
           "metadata":{
              "labels":{
-                "app":"gg-devops-capstone-blue"
+                "app":"gg-devops-capstone-green"
              }
           },
           "spec":{
              "containers":[
                 {
-                   "name":"gg-devops-capstone-blue",
-                   "image":"ggangwar/gg-devops-capstone-blue",
+                   "name":"gg-devops-capstone-green",
+                   "image":"ggangwar/gg-devops-capstone-green",
                    "ports":[
                       {
                          "name":"http-server",

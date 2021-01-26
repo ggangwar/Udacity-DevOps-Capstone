@@ -6,11 +6,11 @@
 # Step 1:
 # Create dockerpath
 # dockerpath=<your docker ID/path>
-dockerpath="ggangwar/gg-devops-capstone-blue"
+dockerpath="ggangwar/gg-devops-capstone-green"
 # Step 2:  
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
-docker tag gg-devops-capstone-blue $dockerpath
+docker tag gg-devops-capstone-green $dockerpath
 docker login --username ggangwar
 # Step 3:
 # Push image to a docker repository

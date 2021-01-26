@@ -15,7 +15,7 @@
           }
        ],
        "selector":{
-          "app":"gg-devops-capstone-blue"
+          "app":"gg-devops-capstone-green"
        },
        "type": "LoadBalancer"
     }
