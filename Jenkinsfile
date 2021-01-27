@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-        stage('Kubernetes cluster') {
+        stage('Create Kubernetes cluster') {
 			steps {
 				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
 					sh '''
@@ -95,6 +95,17 @@ pipeline {
         withAWS(region:'ap-south-1',credentials:'aws-credentials') {
           sh '''
             kubectl apply -f ./blue-green-service.json
+            kubectl get pods
+            kubectl describe pods
+          '''
+          }
+      }
+    }
+    stage('Check pods') {
+      steps {
+        withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+          sh '''
+            sleep 1m
             kubectl get pods
             kubectl describe pods
           '''
