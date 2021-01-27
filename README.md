@@ -7,6 +7,8 @@ In this project, I have developed a CI/CD pipeline for Nginx Hello world applica
 The [blue](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/blue) branch has the code for `blue` deployment and [green](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/green) branch for `green` deployment.
 
 All the screenshots are under [Screenshots](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/main/Screenshots) folder of this repository.
+
+Application URL for my project: http://a7b112233bdbf4e48a83fe1955720164-1090219923.ap-south-1.elb.amazonaws.com:8000
 ## Environment Setup
 
 1. Launched EC2 instance - Installed Java, Jenkins, Docker, AWS CLI, Kubectl, eksctl, hadolint and tidy
