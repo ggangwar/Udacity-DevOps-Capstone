@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-        stage('Kubernetes cluster') {
+        stage('Create Kubernetes cluster') {
 			steps {
 				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
 					sh '''
@@ -21,10 +21,7 @@ pipeline {
 							--region ap-south-1 \
 							--zones ap-south-1a \
 							--zones ap-south-1b \
-							--zones ap-south-1c \
-							which aws
-							aws --version
-							hostname
+							--zones ap-south-1c
 						fi
 					'''
 				}
