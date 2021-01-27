@@ -101,5 +101,16 @@ pipeline {
           }
       }
     }
+    stage('Check pods') {
+      steps {
+        withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+          sh '''
+            sleep 1m
+            kubectl get pods
+            kubectl describe pods
+          '''
+          }
+      }
+    }
   }
 }
