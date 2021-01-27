@@ -21,7 +21,7 @@
           "spec":{
              "containers":[
                 {
-                   "name":"green",
+                   "name":"gg-devops-capstone-green",
                    "image":"ggangwar/gg-devops-capstone-green",
                    "ports":[
                       {
@@ -34,4 +34,5 @@
           }
        }
     }
- } 
+ }
+ 

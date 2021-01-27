@@ -1,6 +1,49 @@
 pipeline {
   agent any
   stages {
+        stage('Create Kubernetes cluster') {
+			steps {
+				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
+					sh '''
+						if aws cloudformation describe-stacks --stack-name eksctl-gg-devops-capstone-cluster; then
+							echo 'eksctl-gg-devops-capstone-cluster stack already exists.'
+						else
+							echo 'eksctl-gg-devops-capstone-cluster stack is being created'
+							eksctl create cluster \
+							--name gg-devops-capstone \
+							--version 1.18 \
+							--nodegroup-name standard-workers \
+							--node-type t2.micro \
+							--nodes 2 \
+							--nodes-min 1 \
+							--nodes-max 3 \
+							--node-ami auto \
+							--region ap-south-1 \
+							--zones ap-south-1a \
+							--zones ap-south-1b \
+							--zones ap-south-1c
+						fi
+					'''
+				}
+			}
+		}
+    stage('Update Kube Config'){
+      steps {
+        withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+          sh 'aws eks --region ap-south-1 update-kubeconfig --name gg-devops-capstone'
+          }
+      }
+    }
+    stage('Set kubectl context') {
+			steps {
+				withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+					sh '''
+            kubectl config get-contexts
+						kubectl config use-context arn:aws:eks:ap-south-1:398230473428:cluster/gg-devops-capstone
+					'''
+				}
+			}
+		}
     stage('Linting') {
       steps {
         echo 'Linting code'
@@ -32,25 +75,41 @@ pipeline {
           sh 'make upload'
         }
       }
-    // }
-    // stage('Create kubeconfig file') {
-    //   steps {
-    //     echo 'Creating cubeconfig file'
-    //     withAWS(region: 'ap-south-1', credentials: 'aws-credentials') {
-    //       sh 'aws eks --region ap-south-1 update-kubeconfig --name gg-devops-capstone'
-    //     }
-    //   }
-    // }
+    }
     stage('Deploy container') {
       steps {
-        echo 'Deploying container'
-        sh 'make deploy'
+        withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+          sh 'kubectl apply -f ./replication-controller.json'
+          }
       }
+    }
+    stage("Docker clean") {
+            steps {
+                script {
+                    sh "docker system prune --force"
+                }
+            }
     }
     stage('Redirect service') {
       steps {
-        echo 'Redirecting service'
-        sh 'make redirect'
+        withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+          sh '''
+            kubectl apply -f ./blue-green-service.json
+            kubectl get pods
+            kubectl describe pods
+          '''
+          }
+      }
+    }
+    stage('Check pods') {
+      steps {
+        withAWS(region:'ap-south-1',credentials:'aws-credentials') {
+          sh '''
+            sleep 1m
+            kubectl get pods
+            kubectl describe pods
+          '''
+          }
       }
     }
   }
