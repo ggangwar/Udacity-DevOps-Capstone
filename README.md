@@ -4,9 +4,9 @@ This is the Capstone project of Udacity Nanodegree course on AWS Cloud DevOps En
 
 In this project, I have developed a CI/CD pipeline for Nginx Hello world application with `Blue/Green` deployment.
 
-The `blue` branch has the code for `blue` deployment and `green` for `green` deployment.
+The [blue](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/blue) branch has the code for `blue` deployment and [green](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/green) branch for `green` deployment.
 
-All the screenshots are under `Screenshots` of this repository.
+All the screenshots are under [Screenshots](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/main/Screenshots) folder of this repository.
 ## Environment Setup
 
 1. Launched EC2 instance - Installed Java, Jenkins, Docker, AWS CLI, Kubectl, eksctl, hadolint and tidy
@@ -18,9 +18,9 @@ All the screenshots are under `Screenshots` of this repository.
 
 ## Steps Taken
 
-1. Launched an EC2 free tier `ubuntu` instance with a Security Group allowing inbound connection on `22` and `8080` ports. Image I used is: ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20201026 (ami-0a4a70bd98c6d6441)
+1. Launched an EC2 free tier `ubuntu` instance with a Security Group allowing inbound connection on `22` and `8080` ports. I used `ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20201026 (ami-0a4a70bd98c6d6441)` image.
 2. Login into EC2 instance using key/pair associated with instance . Install softwares using commands mentioned in `environment-setup.sh` file
-3. Open Jenkins using `http://{public IP of EC2}:8080` in browser 
+3. Open Jenkins using `http://{public IP of EC2}:8080` in browser.
 4. First time password is obtained using `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
 5. Select option to install suggested plugin. // Not required if you use 20.0 ubuntu image
 6. When installation is complete, you are prompted to set up the first admin user. Create the admin user and make note of both the user and password to use in the future. // Not required if you use 20.0 ubuntu image and default admin user is `admin`
@@ -29,15 +29,15 @@ All the screenshots are under `Screenshots` of this repository.
 9. Restart the jenkins using `sudo systemctl restart jenkins`
 10. Open your Github repository and add webhook to allow Jenkins to pick the changes via `Settings => Webhooks => Add webhook`. URL would be `http://{public IP of EC2}:8080/github-webhook/` and content-type `application/json`
 11. Open `Blue Ocean` view in Jenkins and create a new pipeline for Github repository. You will need `Github access token` which can be generated via `Your github-profile => settings => Developer settings => Personal access tokens => Generate new token` with `repo` and `user:email` scope.
-12. Commit changes in the `blue` branch which will trigger Jenkins pipeline to create and deploy container in EKS cluster.
+12. Commit changes in the [blue](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/blue) branch which will trigger Jenkins pipeline to create and deploy container in EKS cluster.
 13. Open the application using loadbalancer url: http://{loadbalancer dns}:8000/
     <p align="center">
-        <img src="./blue-deployment.png">
+        <img src="./Screenshots/Website-Blue.png">
     </p>
-14. Commit changes in the `green` branch which will trigger Jenkins pipeline to create and deploy container in EKS cluster.
+14. Commit changes in the [green](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/green) branch which will trigger Jenkins pipeline to create and deploy container in EKS cluster.
 15. Open the application using loadbalancer url: http://{loadbalancer dns}:8000/
     <p align="center">
-        <img src="./blue-deployment.png">
+        <img src="./Screenshots/Website-Green.png">
     </p>
 
 ## Repository details
