@@ -4,9 +4,9 @@ This is the Capstone project of Udacity Nanodegree course on AWS Cloud DevOps En
 
 In this project, I have developed a CI/CD pipeline for Nginx Hello world application with `Blue/Green` deployment.
 
-The [blue](#https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/blue) branch has the code for `blue` deployment and [green](#https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/green) branch for `green` deployment.
+The [blue](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/blue) branch has the code for `blue` deployment and [green](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/green) branch for `green` deployment.
 
-All the screenshots are under [Screenshots](#https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/main/Screenshots) folder of this repository.
+All the screenshots are under [Screenshots](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/main/Screenshots) folder of this repository.
 ## Environment Setup
 
 1. Launched EC2 instance - Installed Java, Jenkins, Docker, AWS CLI, Kubectl, eksctl, hadolint and tidy
@@ -29,12 +29,12 @@ All the screenshots are under [Screenshots](#https://github.com/ggangwar/Udacity
 9. Restart the jenkins using `sudo systemctl restart jenkins`
 10. Open your Github repository and add webhook to allow Jenkins to pick the changes via `Settings => Webhooks => Add webhook`. URL would be `http://{public IP of EC2}:8080/github-webhook/` and content-type `application/json`
 11. Open `Blue Ocean` view in Jenkins and create a new pipeline for Github repository. You will need `Github access token` which can be generated via `Your github-profile => settings => Developer settings => Personal access tokens => Generate new token` with `repo` and `user:email` scope.
-12. Commit changes in the [blue](#https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/blue) branch which will trigger Jenkins pipeline to create and deploy container in EKS cluster.
+12. Commit changes in the [blue](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/blue) branch which will trigger Jenkins pipeline to create and deploy container in EKS cluster.
 13. Open the application using loadbalancer url: http://{loadbalancer dns}:8000/
     <p align="center">
         <img src="./Screenshots/Website-Blue.png">
     </p>
-14. Commit changes in the [green](#https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/green) branch which will trigger Jenkins pipeline to create and deploy container in EKS cluster.
+14. Commit changes in the [green](https://github.com/ggangwar/Udacity-DevOps-Capstone/tree/green) branch which will trigger Jenkins pipeline to create and deploy container in EKS cluster.
 15. Open the application using loadbalancer url: http://{loadbalancer dns}:8000/
     <p align="center">
         <img src="./Screenshots/Website-Green.png">
